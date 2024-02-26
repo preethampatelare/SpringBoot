@@ -1,9 +1,6 @@
 package com.example.SpringBoot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,21 +17,30 @@ public class SimpleColtroller {
     DataBase db = new DataBase();
 
     // http://localhost:8080/AllUsers
-    @GetMapping("/AllUsers")
+    @GetMapping("/getAllUsers")
     public List<User> getAll(){
         return db.allUsers();
     }
-    /*@GetMapping("/use")
+    @GetMapping("/getUserBySearchName")
     public User getUserBuName(@RequestParam String q){
         return db.returnByName(q);
-    }*/
+    }
     // http://localhost:8080/user/2
-    @GetMapping("/user/{id}")
+    @GetMapping("/getUserById/{id}")
     public User returnById(@PathVariable int id){
         return db.returnById(id);
     }
-    @GetMapping("/Users/{name}")
+    /*@GetMapping("/Users/{name}")
     public User getUserBuName(@PathVariable String name){
         return db.returnByName(name);
+    }*/
+    @PostMapping("/AddUser")
+    public User postUser(@RequestBody User user){
+        return db.addUser(user);
+    }
+
+    @DeleteMapping("/DeleteUser/{id}")
+    public boolean removeUser(@PathVariable int id){
+        return db.deleteUser(id);
     }
 }

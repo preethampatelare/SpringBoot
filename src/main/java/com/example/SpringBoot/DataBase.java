@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DataBase {
+
+
     private List<User> list = new ArrayList<>();
+
     public DataBase(){
         list.add(new User(1,"Shashi",22));
         list.add(new User(2,"Preetham",23));
@@ -30,5 +33,18 @@ public class DataBase {
             }
         }
         return null;
+    }
+    public User addUser(User user){
+        list.add(user);
+        return user;
+    }
+    public boolean deleteUser(int id){
+        for(User user:list){
+            if(user.getId()==id) {
+                list.remove(user);
+                return true;
+            }
+        }
+        return false;
     }
 }
